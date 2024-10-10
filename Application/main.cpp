@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Window.h"
+#include "UI.h"
 #include "include/Aiden_Log/a_log.h"
 
 
@@ -7,6 +8,7 @@ int main()
 {
 	Log::Clear();
     Window window("Application", { 500, 500 });
+	UI ui(window);
 
 
 	while (window.isRun())
@@ -18,6 +20,7 @@ int main()
 		window.onNewFrame();
 
 		// Render Here
+		ui.Render();
 
 		window.onUpdate();
 

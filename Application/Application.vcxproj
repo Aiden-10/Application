@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="include\Aiden_Log\a_log.cpp" />
     <ClCompile Include="include\ImGui\imgui.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Aiden_Log\a_log.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="include\ImGui\imconfig.h" />
     <ClInclude Include="include\ImGui\imgui.h" />
     <ClInclude Include="include\ImGui\imgui_impl_dx11.h" />

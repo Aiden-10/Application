@@ -1,2 +1,3 @@
-[2024-10-10 00:34:46][Window.cpp][76]: Window Created!
-[2024-10-10 00:34:46][Window.cpp][115]: Device and Swap Chain Created!
+[2024-10-10 01:15:37][Window.cpp][76]: Window Created!
+[2024-10-10 01:15:37][Window.cpp][115]: Device and Swap Chain Created!
+[2024-10-10 01:15:39][Window.cpp][188]: Destroying Window!
