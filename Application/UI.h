@@ -49,11 +49,4 @@ private:
 	// ---------------- //
 
 	// void DrawFuser();
-
-	// ---------------- //
-	// ----Settings---- //
-	// ---------------- //
-
-	void DrawSettingsButton();
-	bool show_settings;
 };

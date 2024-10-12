@@ -39,8 +39,6 @@ void UI::DrawRadar()
 	ImGui::SetCursorPos(offset);
 	ImGui::Image(radarImage, ImVec2(image_dimension_x * zoom, image_dimension_y * zoom));
 
-    DrawSettingsButton();
-
 	HandleRadar();
 }
 
@@ -97,8 +95,4 @@ void UI::HandleRadar()
     }
 }
 
-void UI::DrawSettingsButton()
-{
-    
-}
 
