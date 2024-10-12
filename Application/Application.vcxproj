@@ -162,6 +162,9 @@
     <ClInclude Include="include\ImGui\imstb_textedit.h" />
     <ClInclude Include="include\ImGui\imstb_truetype.h" />
     <ClInclude Include="include\Texture\WICTextureLoader.h" />
+    <ClInclude Include="helper.hpp" />
+    <ClInclude Include="UIs\menuconfig.hpp" />
+    <ClInclude Include="UIs\settings.hpp" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

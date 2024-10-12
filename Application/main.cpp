@@ -7,9 +7,11 @@
 int main()
 {
 	Log::Clear();
-    Window window("Application", { 500, 500 });
+    Window window("Application", { 1080, 1080 });
 	UI ui(window);
 
+	HRESULT hr = window.LoadTextureFromFile(L"assets\\maps\\example.png", &ui.radarImage);
+	hr = window.LoadTextureFromFile(L"assets\\icons\\settings.png", &ui.icon_settings);
 
 	while (window.isRun())
 	{
