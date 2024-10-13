@@ -19,7 +19,6 @@ public:
 		ImGui::Text("Radar");
 		ImGui::Spacing();
 
-		ImGui::Checkbox("Turn Radar On/Off", &config::radar);
 		// Todo: Add logic to select image from maps dir
 
         ImGui::Separator();
@@ -67,8 +66,8 @@ public:
 		ImGui::Spacing();
 
 		// settings here
-		ImGui::Checkbox("Bright Night", &config::no_grass);
-		ImGui::Checkbox("No Grass", &config::bright_night);
+		ImGui::Checkbox("Bright Night", &config::bright_night);
+		ImGui::Checkbox("No Grass", &config::no_grass);
         
 		ImGui::End();
 	}

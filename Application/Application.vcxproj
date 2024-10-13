@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Mods\dayz.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="include\Aiden_Log\a_log.cpp" />
@@ -152,6 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Aiden_Log\a_log.h" />
+    <ClInclude Include="Mods\dayz.h" />
+    <ClInclude Include="Mods\vector.h" />
+    <ClInclude Include="Mods\_memory.h" />
+    <ClInclude Include="Mods\offsets.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="include\ImGui\imconfig.h" />
     <ClInclude Include="include\ImGui\imgui.h" />

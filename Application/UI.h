@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Window.h"
+#include "Mods/dayz.h"
 
 #include "include/ImGui/imgui.h"
 #include "include/ImGui/imgui_impl_win32.h"
@@ -12,8 +13,11 @@ class Window;
 class UI
 {
 public:
-	UI(Window& window) : windowRef(window)
+	UI(Window& window)
+		: windowRef(window),
+		game("DayZ_x64.exe") 
 	{
+		game.start_mods();
 	}
 
 	void Render();
@@ -24,6 +28,8 @@ public:
 
 private:
 	Window& windowRef;
+
+	Game game;
 
 	// ---------------- //
 	// ------Radar----- //
@@ -49,4 +55,6 @@ private:
 	// ---------------- //
 
 	// void DrawFuser();
+
+
 };

@@ -51,6 +51,9 @@
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mods\dayz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -96,6 +99,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIs\menuconfig.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mods\_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mods\dayz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mods\offsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mods\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
