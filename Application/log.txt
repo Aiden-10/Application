@@ -1,3 +1,8 @@
-[2024-10-10 01:15:37][Window.cpp][76]: Window Created!
-[2024-10-10 01:15:37][Window.cpp][115]: Device and Swap Chain Created!
-[2024-10-10 01:15:39][Window.cpp][188]: Destroying Window!
+[2024-10-15 23:19:31][Window.cpp][76]: Window Created!
+[2024-10-15 23:19:31][Window.cpp][115]: Device and Swap Chain Created!
+[ERROR!] [2024-10-15 23:19:31][Window.cpp][212]: Failed Loading Texture from File
+[ERROR!] [2024-10-15 23:19:31][Window.cpp][212]: Failed Loading Texture from File
+[ERROR!] [2024-10-15 23:19:31][Window.cpp][212]: Failed Loading Texture from File
+[ERROR!] [2024-10-15 23:19:31][Window.cpp][212]: Failed Loading Texture from File
+[ERROR!] [2024-10-15 23:19:31][Window.cpp][212]: Failed Loading Texture from File
+[2024-10-15 23:19:32][Window.cpp][188]: Destroying Window!

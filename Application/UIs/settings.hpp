@@ -13,7 +13,11 @@ public:
 
 		ImGui::SetNextWindowSize({200.f, 540.f}, ImGuiCond_Always);
 		ImGui::SetNextWindowPos({ WindowPos.x + 10, WindowPos.y + 10}, ImGuiCond_Always);
-		ImGui::SetNextWindowFocus();
+		if (!config::show_crosshair)
+		{
+			ImGui::SetNextWindowFocus();
+		}
+		
 		ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
 		ImGui::Text("Radar");
@@ -34,7 +38,10 @@ public:
 		ImGui::Checkbox("Show Cars", &config::show_cars);
 		ImGui::Checkbox("Show Animals", &config::show_animals);
 
-		ImGui::Button("Add Waypoint");
+		if (ImGui::Button("Add Waypoint"))
+		{
+			config::show_crosshair = !config::show_crosshair;
+		}
 
 		ImGui::Separator();
 		ImGui::Spacing();

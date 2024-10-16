@@ -10,6 +10,7 @@ namespace config
 
 	inline bool center_on_player;
 	inline bool show_waypoints;
+	inline bool show_crosshair;
 	inline bool show_cars;
 	inline bool show_animals;
 

@@ -12,6 +12,9 @@ int main()
 
 	HRESULT hr = window.LoadTextureFromFile(L"assets\\maps\\example.png", &ui.radarImage);
 	hr = window.LoadTextureFromFile(L"assets\\icons\\settings.png", &ui.icon_settings);
+	hr = window.LoadTextureFromFile(L"assets\\icons\\marker.png", &ui.waypoint_marker);
+	hr = window.LoadTextureFromFile(L"assets\\icons\\refresh.png", &ui.icon_refresh);
+	hr = window.LoadTextureFromFile(L"assets\\icons\\plus.png", &ui.icon_plus);
 
 	while (window.isRun())
 	{
