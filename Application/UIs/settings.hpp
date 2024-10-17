@@ -15,6 +15,10 @@ public:
 
 		ImGui::SetNextWindowSize({200.f, 590.f}, ImGuiCond_Always);
 		ImGui::SetNextWindowPos({ WindowPos.x + 10, WindowPos.y + 10}, ImGuiCond_Always);
+		if (!config::show_crosshair && !config::monitors)
+		{
+			// ImGui::SetNextWindowFocus();
+		}
 		
 		ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 

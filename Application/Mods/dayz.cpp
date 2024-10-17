@@ -134,7 +134,7 @@ void Game::update_players()
 {
 	while (true)
 	{
-
+		// get position and other stuff
 	}
 }
 
@@ -147,7 +147,7 @@ void Game::update_writes()
 		
 		if (config::bright_night)
 		{
-			std::cout << "Write 10.f" << std::endl;
+			// std::cout << "Writing 10.f" << std::endl;
 			value = 10.f;
 			memory.Write<float>(world_address + offsets::bright_night, 10.f);
 		}
@@ -166,9 +166,9 @@ void Game::update_writes()
 			memory.Write<float>(world_address + offsets::no_grass, value);
 		}
 
-		// TODO: Freecam
+		// TODO: Freecam (Do in another thread)
 
-		Sleep(1000);
+		Sleep(1000); 
 	}
 }
 

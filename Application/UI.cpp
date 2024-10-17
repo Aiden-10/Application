@@ -14,17 +14,14 @@ BOOL CALLBACK MonitorEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMoni
         config::monitorList.push_back(info);
     }
 
-    return TRUE; // Continue enumerating
+    return TRUE;
 }
 
 void UI::Render()
 {
-    
-
-	DrawRadar();
+	DrawRadar();  // Render This First ALWAYS!
 
     settings::render();
-
     DrawMonitors();
 }
 
@@ -49,7 +46,7 @@ void UI::DrawRadar()
 
 	ImGui::SetNextWindowSize(windowSize, ImGuiCond_Always);
 	ImGui::SetNextWindowPos(WindowPos, ImGuiCond_Always);
-	ImGui::Begin("Radar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBringToFrontOnFocus);
+	ImGui::Begin("Radar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing);
 
 	radarHovered = ImGui::IsWindowHovered();
 	RadarMousePos = { io.MousePos.x - ImGui::GetWindowPos().x, io.MousePos.y - ImGui::GetWindowPos().y };
@@ -236,11 +233,12 @@ void UI::DrawMonitors()
     
 
     for (auto& monitor : config::monitorList) {
-        
+        ImGuiStyle& style = ImGui::GetStyle();
         ImVec2 topLeft(monitor.area.left, monitor.area.top);
 
         if (monitor.selected && config::fuser)
         {
+            style.Colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 1.f);
             ImVec2 monitorSize(monitor.area.right - monitor.area.left, monitor.area.bottom - monitor.area.top);
 
             // Draw Fuser
@@ -255,6 +253,7 @@ void UI::DrawMonitors()
 
             
             ImGui::End();
+            ImGui::StyleColorsDark();
         }
         else if (config::monitors) {
             ImGui::SetNextWindowPos(topLeft);
@@ -264,6 +263,8 @@ void UI::DrawMonitors()
             if (ImGui::Button("Select Monitor"))
             {
                 monitor.selected = true;
+                config::fuser = true;
+                config::monitors = false;
             }
             ImGui::End();
         }
