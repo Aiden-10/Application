@@ -1,8 +1,20 @@
 #pragma once
 
+struct MonitorInfo {
+	std::string name;
+	RECT area;
+	bool selected = false;
+};
+
 namespace config
 {
-	inline bool radar;
+	// ---------------- //
+	// ------Fuser----- //
+	// ---------------- //
+
+	inline bool fuser;
+	inline bool monitors;
+	inline std::vector<MonitorInfo> monitorList;
 
 	// ---------------- //
 	// ------Map------- //

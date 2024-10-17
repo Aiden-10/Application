@@ -3,6 +3,20 @@
 #include "helper.hpp"
 #include "UIs/settings.hpp"
 
+BOOL CALLBACK MonitorEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData) {
+    MONITORINFOEX monitorInfo;
+    monitorInfo.cbSize = sizeof(MONITORINFOEX);
+
+    if (GetMonitorInfo(hMonitor, &monitorInfo)) {
+        MonitorInfo info;
+        info.name = monitorInfo.szDevice;
+        info.area = *lprcMonitor;
+        config::monitorList.push_back(info);
+    }
+
+    return TRUE; // Continue enumerating
+}
+
 void UI::Render()
 {
     
@@ -10,6 +24,14 @@ void UI::Render()
 	DrawRadar();
 
     settings::render();
+
+    DrawMonitors();
+}
+
+void UI::DetectMonitors()
+{
+    config::monitorList.clear();
+    EnumDisplayMonitors(NULL, NULL, MonitorEnumProc, 0);
 }
 
 void UI::DrawRadar()
@@ -27,7 +49,7 @@ void UI::DrawRadar()
 
 	ImGui::SetNextWindowSize(windowSize, ImGuiCond_Always);
 	ImGui::SetNextWindowPos(WindowPos, ImGuiCond_Always);
-	ImGui::Begin("Radar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+	ImGui::Begin("Radar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBringToFrontOnFocus);
 
 	radarHovered = ImGui::IsWindowHovered();
 	RadarMousePos = { io.MousePos.x - ImGui::GetWindowPos().x, io.MousePos.y - ImGui::GetWindowPos().y };
@@ -109,18 +131,33 @@ void UI::HandleRadar()
 
 void UI::DrawWaypoints()
 {
-    for (auto i : waypoints)
+    for (auto it = waypoints.begin(); it != waypoints.end();)
     {
-        float screenX = offset.x + (i.x * zoom);
-        float screenY = offset.y + (i.y * zoom);
+        float screenX = offset.x + (it->x * zoom);
+        float screenY = offset.y + (it->y * zoom);
 
+      
         ImGui::SetCursorPos({ screenX - 12.5f, screenY - 12.5f });
         ImGui::Image(waypoint_marker, { 25, 25 });
+
+       
+        bool hovered = ImGui::IsItemHovered();
+
+        
+        ImColor textColor = hovered ? ImColor(205, 0, 0) : ImColor(255, 255, 255);
         ImGui::SetCursorPos({ screenX, screenY + 12.5f });
-        ImGui::TextColored(ImColor(205, 0, 0), i.name);
+        ImGui::TextColored(textColor, it->name);
 
-        // std::cout << "Waypoint name: << " << i.name << " x: " << i.x << " y: " << i.y << std::endl;
-
+        
+        if (hovered && GetAsyncKeyState(VK_DELETE))
+        {
+           
+            it = waypoints.erase(it);
+        }
+        else
+        {
+            ++it; 
+        }
     }
 }
 
@@ -181,7 +218,7 @@ void UI::DrawCrosshair()
         {
             waypoints.push_back(newPoint);
 
-            std::cout << "New Waypoint name: << " << newPoint.name << " x: " << newPoint.x << " y: " << newPoint.y << std::endl;
+            // std::cout << "New Waypoint name: << " << newPoint.name << " x: " << newPoint.x << " y: " << newPoint.y << std::endl;
 
             config::show_crosshair = false; clicked = false;
         }
@@ -192,4 +229,43 @@ void UI::DrawCrosshair()
     ImGui::End();
 
     ImGui::StyleColorsDark();
+}
+
+void UI::DrawMonitors()
+{
+    
+
+    for (auto& monitor : config::monitorList) {
+        
+        ImVec2 topLeft(monitor.area.left, monitor.area.top);
+
+        if (monitor.selected && config::fuser)
+        {
+            ImVec2 monitorSize(monitor.area.right - monitor.area.left, monitor.area.bottom - monitor.area.top);
+
+            // Draw Fuser
+            ImGui::SetNextWindowSize(monitorSize);
+            ImGui::SetNextWindowPos(topLeft);
+            ImGui::Begin(monitor.name.c_str(), nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+
+            
+            // Draw Here
+            ImDrawList* drawList = ImGui::GetForegroundDrawList();
+            drawList->AddCircle({ topLeft.x + 100.f, topLeft.y + 100.f }, 15.f, ImColor(255, 255, 255));
+
+            
+            ImGui::End();
+        }
+        else if (config::monitors) {
+            ImGui::SetNextWindowPos(topLeft);
+            ImGui::SetNextWindowSize({ 110, 100 });
+            ImGui::Begin(monitor.name.c_str(), nullptr, ImGuiWindowFlags_NoDecoration);
+            ImGui::Text(monitor.name.c_str());
+            if (ImGui::Button("Select Monitor"))
+            {
+                monitor.selected = true;
+            }
+            ImGui::End();
+        }
+    }
 }

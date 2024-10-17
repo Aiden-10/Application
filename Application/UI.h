@@ -17,7 +17,6 @@ struct Dot {
 	int z;
 };
 
-
 class Window;
 
 class UI
@@ -39,6 +38,7 @@ public:
 	ID3D11ShaderResourceView* icon_plus{ nullptr };
 	ID3D11ShaderResourceView* waypoint_marker{ nullptr };
 
+	static void DetectMonitors();
 private:
 	Window& windowRef;
 
@@ -54,6 +54,8 @@ private:
 	void HandleRadar();
 	void DrawWaypoints();
 	void DrawCrosshair();
+	void DrawMonitors();
+	
 	
 
 	std::vector<Dot> waypoints = {};

@@ -3,6 +3,8 @@
 #include "../UI.h"
 #include "menuconfig.hpp"
 
+
+
 class settings
 {
 public:
@@ -11,16 +13,22 @@ public:
 		ImGuiViewport* viewport = ImGui::GetMainViewport();
 		ImVec2 WindowPos = ImVec2(viewport->WorkPos.x, viewport->WorkPos.y);
 
-		ImGui::SetNextWindowSize({200.f, 540.f}, ImGuiCond_Always);
+		ImGui::SetNextWindowSize({200.f, 590.f}, ImGuiCond_Always);
 		ImGui::SetNextWindowPos({ WindowPos.x + 10, WindowPos.y + 10}, ImGuiCond_Always);
-		if (!config::show_crosshair)
-		{
-			ImGui::SetNextWindowFocus();
-		}
 		
 		ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
-		ImGui::Text("Radar");
+		ImGui::Text("Fuser Settings");
+		ImGui::Spacing();
+
+		ImGui::Checkbox("Fuser", &config::fuser);
+		ImGui::Checkbox("Show Monitors", &config::monitors);	
+		if (ImGui::Button("Detect Monitors"))
+		{
+			UI::DetectMonitors();
+		}
+		
+		
 		ImGui::Spacing();
 
 		// Todo: Add logic to select image from maps dir
@@ -75,7 +83,17 @@ public:
 		// settings here
 		ImGui::Checkbox("Bright Night", &config::bright_night);
 		ImGui::Checkbox("No Grass", &config::no_grass);
+
+
+		ImGui::SetNextWindowSize({ 200.f, 200.f }, ImGuiCond_Always);
+		ImGui::SetNextWindowPos({ WindowPos.x + 215.f, WindowPos.y + 10 }, ImGuiCond_Always);
         
 		ImGui::End();
+
+		// Fuser Settings
+
+		
 	}
+
+
 };
